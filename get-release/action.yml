@@ -35,8 +35,8 @@ outputs:
     description: 'Latest release description body'
 runs:
   using: "composite"
-  shell: bash
   steps:
     - name: Start job
+      shell: bash
       run: |
         ls
