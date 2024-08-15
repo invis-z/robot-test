@@ -95,7 +95,7 @@ jobs:
         working-directory: working
         run: |
           git --no-pager config list
-          git remote set-url origin 'https://github-actions[bot]:${{ steps.app-token.outputs.token }}@github.com/${{ inputs.repo }}'
+          git remote set-url origin 'https://bot:${{ steps.app-token.outputs.token }}@github.com/${{ inputs.repo }}'
           git --no-pager config list
           find "${{ github.workspace }}/patch/" -type f -iname *.patch -print0 | sort -z | xargs -r0 git am
           git tag -f ${{ inputs.version }}
