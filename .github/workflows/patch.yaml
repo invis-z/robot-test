@@ -84,9 +84,9 @@ jobs:
           git --no-pager config get --all http.https://github.com/.extraheader
           git config --unset-all http.https://github.com/.extraheader '[Aa][Uu][Tt][Hh][Oo][Rr][Ii][Zz][Aa][Tt][Ii][Oo][Nn]:'
           git --no-pager config get --all http.https://github.com/.extraheader
-          echo here
+          echo here>2
           git config --add http.https://github.com/${{ inputs.repo }}/.extraheader 'Authorization: Basic ${{ steps.app-token.outputs.token }}'
-          echo here?
+          echo here?>2
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Apply Patches
