@@ -79,12 +79,12 @@ jobs:
       - name: Configure Git User
         working-directory: working
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          # git config user.name '${{ steps.app-token.outputs.app-slug }}[bot]'
-          # git config user.email '${{ steps.get-user-id.outputs.user-id }}+${{ steps.app-token.outputs.app-slug }}[bot]@users.noreply.github.com'
-          git config --unset-all http.https://github.com/.extraheader '[Aa][Uu][Tt][Hh][Oo][Rr][Ii][Zz][Aa][Tt][Ii][Oo][Nn]:' || echo "Unable to unset extraheader."
-          git config --add http.https://github.com/.extraheader 'Authorization: Bearer ${{ steps.app-token.outputs.token }}'
+          # git config --global user.name "github-actions[bot]"
+          # git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name '${{ steps.app-token.outputs.app-slug }}[bot]'
+          git config user.email '${{ steps.get-user-id.outputs.user-id }}+${{ steps.app-token.outputs.app-slug }}[bot]@users.noreply.github.com'
+          # git config --unset-all http.https://github.com/.extraheader '[Aa][Uu][Tt][Hh][Oo][Rr][Ii][Zz][Aa][Tt][Ii][Oo][Nn]:' || echo "Unable to unset extraheader."
+          # git config --add http.https://github.com/.extraheader 'Authorization: Bearer ${{ steps.app-token.outputs.token }}'
       - name: Apply Patches
         working-directory: working
         run: |
