@@ -45,7 +45,7 @@ jobs:
       repo: ${{ vars.TARGET_REPO }}
       patch-repo: ${{ github.repository }}
       patch-ref: "patches"
-      # branch: "release"
+      branch: "release"
 
   # build:
   #   name: Build
