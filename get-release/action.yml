@@ -34,6 +34,8 @@ outputs:
   description:
     description: 'Latest release description body'
 runs:
-  using: 'node20'
-  pre: './pre.js'
-  main: './main.js'
+  using: "composite"
+  steps:
+    - name: Start job
+      run: |
+        ls
