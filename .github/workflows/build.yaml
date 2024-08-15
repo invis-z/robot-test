@@ -3,14 +3,19 @@ name: Build Release Docker
 on:
   workflow_call:
     inputs:
-        version:
-          description: 'Version to build'
-          required: true
-          type: string
-        repo:
-          description: 'Source repo'
-          required: true
-          type: string
+      version:
+        description: 'Version to build'
+        required: true
+        type: string
+      repo:
+        description: 'Source repo'
+        required: true
+        type: string
+    secrets:
+      DOCKERHUB_USERNAME:
+        required: true
+      DOCKERHUB_TOKEN:
+        required: true
 
 jobs:
   docker:
@@ -27,8 +32,8 @@ jobs:
         with:
           go-version: 'stable'
           check-latest: true
-      # - name: Set up QEMU
-      #   uses: docker/setup-qemu-action@v3
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - name: Login to Docker Hub

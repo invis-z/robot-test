@@ -47,14 +47,14 @@ jobs:
       patch-ref: "patches"
       branch: "release"
 
-  # build:
-  #   name: Build
-  #   needs: check-update
-  #   if: ${{ needs.check-update.outputs.need_update  == 'true' && needs.check-update.outputs.prerelease == 'false' }}
-  #   uses: invis-z/robot-test/.github/workflows/build.yaml@workflows
-  #   secrets: 
-  #     DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-  #     DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-  #   with:
-  #     version: ${{ needs.check-update.outputs.version }}
-  #     repo: ${{ vars.TARGET_REPO }}
+  build:
+    name: Build
+    needs: check-update
+    if: ${{ needs.check-update.outputs.need_update  == 'true' && needs.check-update.outputs.prerelease == 'false' }}
+    uses: invis-z/robot-test/.github/workflows/build.yaml@workflows
+    secrets: 
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+    with:
+      version: ${{ needs.check-update.outputs.version }}
+      repo: ${{ vars.TARGET_REPO }}
