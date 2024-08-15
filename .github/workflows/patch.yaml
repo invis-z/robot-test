@@ -88,7 +88,7 @@ jobs:
           # git config --unset-all http.https://github.com/.extraheader '[Aa][Uu][Tt][Hh][Oo][Rr][Ii][Zz][Aa][Tt][Ii][Oo][Nn]:' || echo "Unable to unset extraheader."
           git config --unset-all http.https://github.com/.extraheader
           git --no-pager config list
-          git config --add http.https://github.com/.extraheader 'Authorization: Bearer ${{ steps.app-token.outputs.token }}'
+          git config --add http.https://github.com/.extraheader 'authorization: bearer ${{ steps.app-token.outputs.token }}'
       - name: Apply Patches
         working-directory: working
         run: |
