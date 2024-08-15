@@ -8,7 +8,7 @@ jobs:
     name: Check Update
     runs-on: ubuntu-latest
     outputs:
-      version: ${{ steps.get-upstream-release.outputs.version }}
+      version: ${{ steps.get-upstream-release.outputs.release }}
       need_update: ${{ steps.newer.outputs.need_update }}
       prerelease: ${{ steps.get-upstream-release.outputs.prerelease }}
     steps:
