@@ -20,6 +20,7 @@ jobs:
           excludes: draft
       - name: Get latest release
         id: get-release
+        continue-on-error: true
         uses: invis-z/robot-test/get-release@workflows
         with:
           repository: ${{ vars.TARGET_REPO }}
