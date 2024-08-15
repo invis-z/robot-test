@@ -8,4 +8,4 @@ const packages={
 	}
 }
 fs.writeFileSync('package.json', JSON.stringify(packages));
-child_process.execSync('ls -lAR',{stdio:[0,1,2]});
+child_process.execSync('npm install',{stdio:[0,1,2]});
