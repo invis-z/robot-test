@@ -88,7 +88,7 @@ jobs:
           find "${{ github.workspace }}/patch/" -type f -iname *.patch -print0 | sort -z | xargs -r0 git am
           git tag -f ${{ inputs.version }}
       - name: Push to Branch
-        if: ${{ inputs.branch != "" }}
+        if: ${{ inputs.branch != '' }}
         id: push-branch
         working-directory: working
         run: |
