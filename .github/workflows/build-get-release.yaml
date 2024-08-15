@@ -31,6 +31,6 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add get-release/dist/*
           if ! (git diff -s --staged --exit-code); then
-            git commit -m "Build `get-release` for ${{ github.sha }}"
+            git commit -m 'Build `get-release` for ${{ github.sha }}'
             git push
           fi
