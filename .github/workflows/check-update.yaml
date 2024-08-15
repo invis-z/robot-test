@@ -5,10 +5,6 @@ on:
   schedule:
     - cron: "0 0 * * *"
 
-env:
-  UPSTREAM_REPO: smallstep/certificates
-  TARGET_REPO: invis-z/step-ca-eab
-
 jobs:
   check-update:
     name: Check Update
@@ -20,33 +16,18 @@ jobs:
     steps:
       - name: Get Upstream release
         id: get-upstream-release
-        uses: invis-z/smallstep-robots/get-release@workflows
+        uses: invis-z/robot-test/get-release@workflows
         with:
           repository: ${{ vars.UPSTREAM_REPO }}
           excludes: draft
       - name: Get latest release
         id: get-release
-        uses: invis-z/smallstep-robots/get-release@workflows
+        uses: invis-z/robot-test/get-release@workflows
         with:
           repository: ${{ vars.TARGET_REPO }}
           excludes: draft
-      - name: Get version
-        id: version
-        env:
-          RELEASE_TAG: ${{ steps.get-upstream-release.outputs.release }}
-        run: |
-          # Get version
-          if [ ! -f VERSION ]; then
-            touch VERSION
-            git config user.name github-actions[bot]
-            git config user.email github-actions[bot]@users.noreply.github.com
-            git add .
-            git commit -m "Create VERSION"
-          fi
-          echo ${RELEASE_TAG#v} | tee VERSION
-          echo version=${RELEASE_TAG#v} >> "$GITHUB_OUTPUT"
       - name: Version is different
-        if: ${{ steps.get-upstream-release.outputs.release  != steps.get-release.outputs.release }}
+        if: ${{ steps.get-upstream-release.outputs.release != steps.get-release.outputs.release }}
         id: newer
         run: |
           echo need_update=true >> "$GITHUB_OUTPUT"
@@ -55,7 +36,7 @@ jobs:
     name: Patch
     needs: check-update
     if: ${{ needs.check-update.outputs.need_update  == 'true' }}
-    uses: invis-z/smallstep-robots/.github/workflows/patch.yaml@workflows
+    uses: invis-z/robot-test/.github/workflows/patch.yaml@workflows
     secrets: 
       APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
     with:
@@ -66,16 +47,14 @@ jobs:
       patch-repo: ${{ github.repository }}
       patch-ref: "patches"
 
-
-
-  build:
-    name: Build
-    needs: check-update
-    if: ${{ needs.check-update.outputs.need_update  == 'true' && needs.check-update.outputs.prerelease == 'false' }}
-    uses: invis-z/smallstep-robots/.github/workflows/build.yaml@workflows
-    secrets: 
-      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-    with:
-      version: ${{ needs.check-update.outputs.version }}
-      repo: ${{ vars.TARGET_REPO }}
+  # build:
+  #   name: Build
+  #   needs: check-update
+  #   if: ${{ needs.check-update.outputs.need_update  == 'true' && needs.check-update.outputs.prerelease == 'false' }}
+  #   uses: invis-z/robot-test/.github/workflows/build.yaml@workflows
+  #   secrets: 
+  #     DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+  #     DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+  #   with:
+  #     version: ${{ needs.check-update.outputs.version }}
+  #     repo: ${{ vars.TARGET_REPO }}
