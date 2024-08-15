@@ -35,5 +35,4 @@ outputs:
     description: 'Latest release description body'
 runs:
   using: 'node20'
-  pre: 'pre.js'
-  main: 'main.js'
+  main: 'dist/index.js'
