@@ -44,6 +44,7 @@ jobs:
         with:
           repository: ${{ inputs.src-repo }}
           ref: ${{ inputs.version }}
+          fetch-depth: 0
           path: working
       - name: Checkout
         uses: actions/checkout@v4
