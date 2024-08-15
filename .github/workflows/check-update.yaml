@@ -1,7 +1,7 @@
 name: Check Update
 
 on:
-  push:
+  workflow_dispatch:
 
 jobs:
   check-update:

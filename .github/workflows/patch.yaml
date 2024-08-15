@@ -81,21 +81,12 @@ jobs:
       - name: Configure Git User
         working-directory: working
         run: |
-          git --no-pager config list
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          # git config --global credential.https://github.com.username github-actions[bot]
-          # git config --global credential.https://github.com.password '${{ steps.app-token.outputs.token }}'
-          # git config --unset-all http.https://github.com/.extraheader '[Aa][Uu][Tt][Hh][Oo][Rr][Ii][Zz][Aa][Tt][Ii][Oo][Nn]:' || echo "Unable to unset extraheader."
-          # git config --unset-all http.https://github.com/.extraheader
-          git --no-pager config list
-          # git config --add http.https://github.com/.extraheader 'Authorization: Bearer ${{ steps.app-token.outputs.token }}'
       - name: Apply Patches
         working-directory: working
         run: |
-          git --no-pager config list
           git remote set-url origin 'https://github.com/${{ inputs.repo }}'
-          git --no-pager config list
           find "${{ github.workspace }}/patch/" -type f -iname *.patch -print0 | sort -z | xargs -r0 git am
           git tag -f ${{ inputs.version }}
       - name: Push to Branch
@@ -108,7 +99,6 @@ jobs:
         id: push-tag
         working-directory: working
         run: |
-          git --no-pager config list
           git push --force --tag
       - name: Create Release
         id: create_release
