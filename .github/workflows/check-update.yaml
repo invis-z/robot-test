@@ -49,7 +49,7 @@ jobs:
 
   build:
     name: Build
-    needs: check-update
+    needs: [check-update, patch]
     if: ${{ needs.check-update.outputs.need_update  == 'true' && needs.check-update.outputs.prerelease == 'false' }}
     uses: invis-z/robot-test/.github/workflows/build.yaml@workflows
     secrets: 

@@ -26,7 +26,7 @@ async function run() {
             });
         releases = releases.data;
         releases.sort(function(a, b) { 
-            // return b.id - a.id;
+            // return b.id - a.id; // I don't know if GitHub's id is only increasing...
             return Date.parse(b.published_at) - Date.parse(a.published_at);
         })
         if (excludes.includes('prerelease')) {
