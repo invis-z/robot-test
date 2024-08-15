@@ -82,8 +82,8 @@ jobs:
           git config user.name '${{ steps.app-token.outputs.app-slug }}[bot]'
           git config user.email '${{ steps.get-user-id.outputs.user-id }}+${{ steps.app-token.outputs.app-slug }}[bot]@users.noreply.github.com'
           git --no-pager config get --all http.https://github.com/.extraheader
-          git config unset --value='Authorization: Basic*' http.https://github.com/.extraheader
-          # git --no-pager config get --all http.https://github.com/.extraheader
+          git config unset --value='[Aa][Uu][Tt][Hh][Oo][Rr][Ii][Zz][Aa][Tt][Ii][Oo][Nn]:' http.https://github.com/.extraheader
+          git --no-pager config get --all http.https://github.com/.extraheader
           git config http.https://github.com/${{ inputs.repo }}/.extraheader 'Authorization: Basic ${{ steps.app-token.outputs.token }}'
           # git config user.name "github-actions[bot]"
           # git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
