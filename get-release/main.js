@@ -25,6 +25,10 @@ async function run() {
             repo: repo,
             });
         releases = releases.data;
+        releases.sort(function(a, b) { 
+            // return b.id - a.id;
+            return Date.parse(b.published_at) - Date.parse(a.published_at);
+        })
         if (excludes.includes('prerelease')) {
             releases = releases.filter(x => x.prerelease != true);
         }
