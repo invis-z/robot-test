@@ -79,8 +79,8 @@ jobs:
       - name: Configure Git User
         working-directory: working
         run: |
-          git config --global user.name '${{ steps.app-token.outputs.app-slug }}[bot]'
-          git config --global user.email '${{ steps.get-user-id.outputs.user-id }}+${{ steps.app-token.outputs.app-slug }}[bot]@users.noreply.github.com>'
+          git config user.name '${{ steps.app-token.outputs.app-slug }}[bot]'
+          git config user.email '${{ steps.get-user-id.outputs.user-id }}+${{ steps.app-token.outputs.app-slug }}[bot]@users.noreply.github.com>'
       - name: Apply Patches
         working-directory: working
         run: |
@@ -92,11 +92,7 @@ jobs:
         id: push-branch
         working-directory: working
         run: |
-          if (git ls-remote --exit-code --heads https://github.com/${{ inputs.repo }}.git refs/heads/${{ inputs.branch }}) then
-            git branch -M ${{ inputs.branch }}
-            git push origin ${{ inputs.branch }}
-          fi
-          git push --force origin HEAD:${{ inputs.branch }}
+          git push --force origin HEAD:refs/heads/${{ inputs.branch }}
       - name: Push to Tag
         id: push-tag
         working-directory: working
