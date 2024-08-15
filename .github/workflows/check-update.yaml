@@ -39,7 +39,7 @@ jobs:
       APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
     with:
       version: ${{ needs.check-update.outputs.version }}
-      prerelase: ${{ needs.check-update.outputs.prerelease == 'true' }}
+      prerelease: ${{ needs.check-update.outputs.prerelease == 'true' }}
       src-repo: ${{ vars.UPSTREAM_REPO }}
       repo: ${{ vars.TARGET_REPO }}
       patch-repo: ${{ github.repository }}
